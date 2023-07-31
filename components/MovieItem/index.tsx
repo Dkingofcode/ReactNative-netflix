@@ -30,4 +30,4 @@ const MovieItem = ({ movie }: {movie: Movie}) => {
     )
 }
 
-export default MovieItem
+export default MovieItem;

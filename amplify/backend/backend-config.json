@@ -1,37 +1,37 @@
 {
-	"auth": {
-		"netflixd3938a31": {
-			"service": "Cognito",
-			"providerPlugin": "awscloudformation",
-			"dependsOn": [],
-			"customAuth": false
-		}
-	},
-	"api": {
-		"netflix": {
-			"service": "AppSync",
-			"providerPlugin": "awscloudformation",
-			"output": {
-				"authConfig": {
-					"defaultAuthentication": {
-						"authenticationType": "AMAZON_COGNITO_USER_POOLS",
-						"userPoolConfig": {
-							"userPoolId": "authnetflixd3938a31_userpool_d3938a31"
-						}
-					},
-					"additionalAuthenticationProviders": [
-						{
-							"authenticationType": "AWS_IAM"
-						}
-					]
-				}
-			}
-		}
-	},
-	"storage": {
-		"netflixmedia": {
-			"service": "S3",
-			"providerPlugin": "awscloudformation"
-		}
-	}
+  "api": {
+    "netflix": {
+      "output": {
+        "authConfig": {
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "AWS_IAM"
+            }
+          ],
+          "defaultAuthentication": {
+            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+            "userPoolConfig": {
+              "userPoolId": "authnetflixd3938a31_userpool_d3938a31"
+            }
+          }
+        }
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "AppSync"
+    }
+  },
+  "auth": {
+    "netflixd3938a31": {
+      "customAuth": false,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito"
+    }
+  },
+  "storage": {
+    "netflixmedia": {
+      "providerPlugin": "awscloudformation",
+      "service": "S3"
+    }
+  }
 }

@@ -55,6 +55,89 @@ export type ModelSizeInput = {
   between?: Array< number | null > | null,
 };
 
+export type Category = {
+  __typename: "Category",
+  id: string,
+  title: string,
+  movies?: ModelMovieConnection | null,
+  _version: number,
+  _deleted?: boolean | null,
+  _lastChangedAt: number,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type ModelMovieConnection = {
+  __typename: "ModelMovieConnection",
+  items:  Array<Movie | null >,
+  nextToken?: string | null,
+  startedAt?: number | null,
+};
+
+export type Movie = {
+  __typename: "Movie",
+  id: string,
+  title: string,
+  poster: string,
+  year?: number | null,
+  numberOfSeasons?: number | null,
+  plot?: string | null,
+  cast?: string | null,
+  creator?: string | null,
+  categoryID: string,
+  seasons?: ModelSeasonConnection | null,
+  _version: number,
+  _deleted?: boolean | null,
+  _lastChangedAt: number,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type ModelSeasonConnection = {
+  __typename: "ModelSeasonConnection",
+  items:  Array<Season | null >,
+  nextToken?: string | null,
+  startedAt?: number | null,
+};
+
+export type Season = {
+  __typename: "Season",
+  id: string,
+  name: string,
+  movieID: string,
+  movie?: Movie | null,
+  episodes?: ModelEpisodeConnection | null,
+  _version: number,
+  _deleted?: boolean | null,
+  _lastChangedAt: number,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type ModelEpisodeConnection = {
+  __typename: "ModelEpisodeConnection",
+  items:  Array<Episode | null >,
+  nextToken?: string | null,
+  startedAt?: number | null,
+};
+
+export type Episode = {
+  __typename: "Episode",
+  id: string,
+  title: string,
+  poster: string,
+  duration: string,
+  plot?: string | null,
+  video: string,
+  seasonID: string,
+  season?: Season | null,
+  _version: number,
+  _deleted?: boolean | null,
+  _lastChangedAt: number,
+  createdAt: string,
+  updatedAt: string,
+};
+
 export type UpdateCategoryInput = {
   id: string,
   title?: string | null,
@@ -62,7 +145,7 @@ export type UpdateCategoryInput = {
 };
 
 export type DeleteCategoryInput = {
-  id?: string | null,
+  id: string,
   _version?: number | null,
 };
 
@@ -135,7 +218,7 @@ export type UpdateMovieInput = {
 };
 
 export type DeleteMovieInput = {
-  id?: string | null,
+  id: string,
   _version?: number | null,
 };
 
@@ -162,7 +245,7 @@ export type UpdateSeasonInput = {
 };
 
 export type DeleteSeasonInput = {
-  id?: string | null,
+  id: string,
   _version?: number | null,
 };
 
@@ -201,7 +284,7 @@ export type UpdateEpisodeInput = {
 };
 
 export type DeleteEpisodeInput = {
-  id?: string | null,
+  id: string,
   _version?: number | null,
 };
 
@@ -211,6 +294,13 @@ export type ModelCategoryFilterInput = {
   and?: Array< ModelCategoryFilterInput | null > | null,
   or?: Array< ModelCategoryFilterInput | null > | null,
   not?: ModelCategoryFilterInput | null,
+};
+
+export type ModelCategoryConnection = {
+  __typename: "ModelCategoryConnection",
+  items:  Array<Category | null >,
+  nextToken?: string | null,
+  startedAt?: number | null,
 };
 
 export type ModelMovieFilterInput = {
@@ -256,34 +346,34 @@ export type CreateCategoryMutationVariables = {
 };
 
 export type CreateCategoryMutation = {
-  createCategory:  {
+  createCategory?:  {
     __typename: "Category",
     id: string,
     title: string,
-    movies:  {
+    movies?:  {
       __typename: "ModelMovieConnection",
       items:  Array< {
         __typename: "Movie",
         id: string,
         title: string,
         poster: string,
-        year: number | null,
-        numberOfSeasons: number | null,
-        plot: string | null,
-        cast: string | null,
-        creator: string | null,
+        year?: number | null,
+        numberOfSeasons?: number | null,
+        plot?: string | null,
+        cast?: string | null,
+        creator?: string | null,
         categoryID: string,
         _version: number,
-        _deleted: boolean | null,
+        _deleted?: boolean | null,
         _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
-      } | null > | null,
-      nextToken: string | null,
-      startedAt: number | null,
+      } | null >,
+      nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
     _version: number,
-    _deleted: boolean | null,
+    _deleted?: boolean | null,
     _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
@@ -296,34 +386,34 @@ export type UpdateCategoryMutationVariables = {
 };
 
 export type UpdateCategoryMutation = {
-  updateCategory:  {
+  updateCategory?:  {
     __typename: "Category",
     id: string,
     title: string,
-    movies:  {
+    movies?:  {
       __typename: "ModelMovieConnection",
       items:  Array< {
         __typename: "Movie",
         id: string,
         title: string,
         poster: string,
-        year: number | null,
-        numberOfSeasons: number | null,
-        plot: string | null,
-        cast: string | null,
-        creator: string | null,
+        year?: number | null,
+        numberOfSeasons?: number | null,
+        plot?: string | null,
+        cast?: string | null,
+        creator?: string | null,
         categoryID: string,
         _version: number,
-        _deleted: boolean | null,
+        _deleted?: boolean | null,
         _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
-      } | null > | null,
-      nextToken: string | null,
-      startedAt: number | null,
+      } | null >,
+      nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
     _version: number,
-    _deleted: boolean | null,
+    _deleted?: boolean | null,
     _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
@@ -336,34 +426,34 @@ export type DeleteCategoryMutationVariables = {
 };
 
 export type DeleteCategoryMutation = {
-  deleteCategory:  {
+  deleteCategory?:  {
     __typename: "Category",
     id: string,
     title: string,
-    movies:  {
+    movies?:  {
       __typename: "ModelMovieConnection",
       items:  Array< {
         __typename: "Movie",
         id: string,
         title: string,
         poster: string,
-        year: number | null,
-        numberOfSeasons: number | null,
-        plot: string | null,
-        cast: string | null,
-        creator: string | null,
+        year?: number | null,
+        numberOfSeasons?: number | null,
+        plot?: string | null,
+        cast?: string | null,
+        creator?: string | null,
         categoryID: string,
         _version: number,
-        _deleted: boolean | null,
+        _deleted?: boolean | null,
         _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
-      } | null > | null,
-      nextToken: string | null,
-      startedAt: number | null,
+      } | null >,
+      nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
     _version: number,
-    _deleted: boolean | null,
+    _deleted?: boolean | null,
     _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
@@ -376,18 +466,18 @@ export type CreateMovieMutationVariables = {
 };
 
 export type CreateMovieMutation = {
-  createMovie:  {
+  createMovie?:  {
     __typename: "Movie",
     id: string,
     title: string,
     poster: string,
-    year: number | null,
-    numberOfSeasons: number | null,
-    plot: string | null,
-    cast: string | null,
-    creator: string | null,
+    year?: number | null,
+    numberOfSeasons?: number | null,
+    plot?: string | null,
+    cast?: string | null,
+    creator?: string | null,
     categoryID: string,
-    seasons:  {
+    seasons?:  {
       __typename: "ModelSeasonConnection",
       items:  Array< {
         __typename: "Season",
@@ -395,16 +485,16 @@ export type CreateMovieMutation = {
         name: string,
         movieID: string,
         _version: number,
-        _deleted: boolean | null,
+        _deleted?: boolean | null,
         _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
-      } | null > | null,
-      nextToken: string | null,
-      startedAt: number | null,
+      } | null >,
+      nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
     _version: number,
-    _deleted: boolean | null,
+    _deleted?: boolean | null,
     _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
@@ -417,18 +507,18 @@ export type UpdateMovieMutationVariables = {
 };
 
 export type UpdateMovieMutation = {
-  updateMovie:  {
+  updateMovie?:  {
     __typename: "Movie",
     id: string,
     title: string,
     poster: string,
-    year: number | null,
-    numberOfSeasons: number | null,
-    plot: string | null,
-    cast: string | null,
-    creator: string | null,
+    year?: number | null,
+    numberOfSeasons?: number | null,
+    plot?: string | null,
+    cast?: string | null,
+    creator?: string | null,
     categoryID: string,
-    seasons:  {
+    seasons?:  {
       __typename: "ModelSeasonConnection",
       items:  Array< {
         __typename: "Season",
@@ -436,16 +526,16 @@ export type UpdateMovieMutation = {
         name: string,
         movieID: string,
         _version: number,
-        _deleted: boolean | null,
+        _deleted?: boolean | null,
         _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
-      } | null > | null,
-      nextToken: string | null,
-      startedAt: number | null,
+      } | null >,
+      nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
     _version: number,
-    _deleted: boolean | null,
+    _deleted?: boolean | null,
     _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
@@ -458,18 +548,18 @@ export type DeleteMovieMutationVariables = {
 };
 
 export type DeleteMovieMutation = {
-  deleteMovie:  {
+  deleteMovie?:  {
     __typename: "Movie",
     id: string,
     title: string,
     poster: string,
-    year: number | null,
-    numberOfSeasons: number | null,
-    plot: string | null,
-    cast: string | null,
-    creator: string | null,
+    year?: number | null,
+    numberOfSeasons?: number | null,
+    plot?: string | null,
+    cast?: string | null,
+    creator?: string | null,
     categoryID: string,
-    seasons:  {
+    seasons?:  {
       __typename: "ModelSeasonConnection",
       items:  Array< {
         __typename: "Season",
@@ -477,16 +567,16 @@ export type DeleteMovieMutation = {
         name: string,
         movieID: string,
         _version: number,
-        _deleted: boolean | null,
+        _deleted?: boolean | null,
         _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
-      } | null > | null,
-      nextToken: string | null,
-      startedAt: number | null,
+      } | null >,
+      nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
     _version: number,
-    _deleted: boolean | null,
+    _deleted?: boolean | null,
     _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
@@ -499,34 +589,34 @@ export type CreateSeasonMutationVariables = {
 };
 
 export type CreateSeasonMutation = {
-  createSeason:  {
+  createSeason?:  {
     __typename: "Season",
     id: string,
     name: string,
     movieID: string,
-    movie:  {
+    movie?:  {
       __typename: "Movie",
       id: string,
       title: string,
       poster: string,
-      year: number | null,
-      numberOfSeasons: number | null,
-      plot: string | null,
-      cast: string | null,
-      creator: string | null,
+      year?: number | null,
+      numberOfSeasons?: number | null,
+      plot?: string | null,
+      cast?: string | null,
+      creator?: string | null,
       categoryID: string,
-      seasons:  {
+      seasons?:  {
         __typename: "ModelSeasonConnection",
-        nextToken: string | null,
-        startedAt: number | null,
+        nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
       _version: number,
-      _deleted: boolean | null,
+      _deleted?: boolean | null,
       _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
     } | null,
-    episodes:  {
+    episodes?:  {
       __typename: "ModelEpisodeConnection",
       items:  Array< {
         __typename: "Episode",
@@ -534,20 +624,20 @@ export type CreateSeasonMutation = {
         title: string,
         poster: string,
         duration: string,
-        plot: string | null,
+        plot?: string | null,
         video: string,
         seasonID: string,
         _version: number,
-        _deleted: boolean | null,
+        _deleted?: boolean | null,
         _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
-      } | null > | null,
-      nextToken: string | null,
-      startedAt: number | null,
+      } | null >,
+      nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
     _version: number,
-    _deleted: boolean | null,
+    _deleted?: boolean | null,
     _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
@@ -560,34 +650,34 @@ export type UpdateSeasonMutationVariables = {
 };
 
 export type UpdateSeasonMutation = {
-  updateSeason:  {
+  updateSeason?:  {
     __typename: "Season",
     id: string,
     name: string,
     movieID: string,
-    movie:  {
+    movie?:  {
       __typename: "Movie",
       id: string,
       title: string,
       poster: string,
-      year: number | null,
-      numberOfSeasons: number | null,
-      plot: string | null,
-      cast: string | null,
-      creator: string | null,
+      year?: number | null,
+      numberOfSeasons?: number | null,
+      plot?: string | null,
+      cast?: string | null,
+      creator?: string | null,
       categoryID: string,
-      seasons:  {
+      seasons?:  {
         __typename: "ModelSeasonConnection",
-        nextToken: string | null,
-        startedAt: number | null,
+        nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
       _version: number,
-      _deleted: boolean | null,
+      _deleted?: boolean | null,
       _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
     } | null,
-    episodes:  {
+    episodes?:  {
       __typename: "ModelEpisodeConnection",
       items:  Array< {
         __typename: "Episode",
@@ -595,20 +685,20 @@ export type UpdateSeasonMutation = {
         title: string,
         poster: string,
         duration: string,
-        plot: string | null,
+        plot?: string | null,
         video: string,
         seasonID: string,
         _version: number,
-        _deleted: boolean | null,
+        _deleted?: boolean | null,
         _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
-      } | null > | null,
-      nextToken: string | null,
-      startedAt: number | null,
+      } | null >,
+      nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
     _version: number,
-    _deleted: boolean | null,
+    _deleted?: boolean | null,
     _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
@@ -621,34 +711,34 @@ export type DeleteSeasonMutationVariables = {
 };
 
 export type DeleteSeasonMutation = {
-  deleteSeason:  {
+  deleteSeason?:  {
     __typename: "Season",
     id: string,
     name: string,
     movieID: string,
-    movie:  {
+    movie?:  {
       __typename: "Movie",
       id: string,
       title: string,
       poster: string,
-      year: number | null,
-      numberOfSeasons: number | null,
-      plot: string | null,
-      cast: string | null,
-      creator: string | null,
+      year?: number | null,
+      numberOfSeasons?: number | null,
+      plot?: string | null,
+      cast?: string | null,
+      creator?: string | null,
       categoryID: string,
-      seasons:  {
+      seasons?:  {
         __typename: "ModelSeasonConnection",
-        nextToken: string | null,
-        startedAt: number | null,
+        nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
       _version: number,
-      _deleted: boolean | null,
+      _deleted?: boolean | null,
       _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
     } | null,
-    episodes:  {
+    episodes?:  {
       __typename: "ModelEpisodeConnection",
       items:  Array< {
         __typename: "Episode",
@@ -656,20 +746,20 @@ export type DeleteSeasonMutation = {
         title: string,
         poster: string,
         duration: string,
-        plot: string | null,
+        plot?: string | null,
         video: string,
         seasonID: string,
         _version: number,
-        _deleted: boolean | null,
+        _deleted?: boolean | null,
         _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
-      } | null > | null,
-      nextToken: string | null,
-      startedAt: number | null,
+      } | null >,
+      nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
     _version: number,
-    _deleted: boolean | null,
+    _deleted?: boolean | null,
     _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
@@ -682,50 +772,50 @@ export type CreateEpisodeMutationVariables = {
 };
 
 export type CreateEpisodeMutation = {
-  createEpisode:  {
+  createEpisode?:  {
     __typename: "Episode",
     id: string,
     title: string,
     poster: string,
     duration: string,
-    plot: string | null,
+    plot?: string | null,
     video: string,
     seasonID: string,
-    season:  {
+    season?:  {
       __typename: "Season",
       id: string,
       name: string,
       movieID: string,
-      movie:  {
+      movie?:  {
         __typename: "Movie",
         id: string,
         title: string,
         poster: string,
-        year: number | null,
-        numberOfSeasons: number | null,
-        plot: string | null,
-        cast: string | null,
-        creator: string | null,
+        year?: number | null,
+        numberOfSeasons?: number | null,
+        plot?: string | null,
+        cast?: string | null,
+        creator?: string | null,
         categoryID: string,
         _version: number,
-        _deleted: boolean | null,
+        _deleted?: boolean | null,
         _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null,
-      episodes:  {
+      episodes?:  {
         __typename: "ModelEpisodeConnection",
-        nextToken: string | null,
-        startedAt: number | null,
+        nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
       _version: number,
-      _deleted: boolean | null,
+      _deleted?: boolean | null,
       _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
     } | null,
     _version: number,
-    _deleted: boolean | null,
+    _deleted?: boolean | null,
     _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
@@ -738,50 +828,50 @@ export type UpdateEpisodeMutationVariables = {
 };
 
 export type UpdateEpisodeMutation = {
-  updateEpisode:  {
+  updateEpisode?:  {
     __typename: "Episode",
     id: string,
     title: string,
     poster: string,
     duration: string,
-    plot: string | null,
+    plot?: string | null,
     video: string,
     seasonID: string,
-    season:  {
+    season?:  {
       __typename: "Season",
       id: string,
       name: string,
       movieID: string,
-      movie:  {
+      movie?:  {
         __typename: "Movie",
         id: string,
         title: string,
         poster: string,
-        year: number | null,
-        numberOfSeasons: number | null,
-        plot: string | null,
-        cast: string | null,
-        creator: string | null,
+        year?: number | null,
+        numberOfSeasons?: number | null,
+        plot?: string | null,
+        cast?: string | null,
+        creator?: string | null,
         categoryID: string,
         _version: number,
-        _deleted: boolean | null,
+        _deleted?: boolean | null,
         _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null,
-      episodes:  {
+      episodes?:  {
         __typename: "ModelEpisodeConnection",
-        nextToken: string | null,
-        startedAt: number | null,
+        nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
       _version: number,
-      _deleted: boolean | null,
+      _deleted?: boolean | null,
       _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
     } | null,
     _version: number,
-    _deleted: boolean | null,
+    _deleted?: boolean | null,
     _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
@@ -794,50 +884,50 @@ export type DeleteEpisodeMutationVariables = {
 };
 
 export type DeleteEpisodeMutation = {
-  deleteEpisode:  {
+  deleteEpisode?:  {
     __typename: "Episode",
     id: string,
     title: string,
     poster: string,
     duration: string,
-    plot: string | null,
+    plot?: string | null,
     video: string,
     seasonID: string,
-    season:  {
+    season?:  {
       __typename: "Season",
       id: string,
       name: string,
       movieID: string,
-      movie:  {
+      movie?:  {
         __typename: "Movie",
         id: string,
         title: string,
         poster: string,
-        year: number | null,
-        numberOfSeasons: number | null,
-        plot: string | null,
-        cast: string | null,
-        creator: string | null,
+        year?: number | null,
+        numberOfSeasons?: number | null,
+        plot?: string | null,
+        cast?: string | null,
+        creator?: string | null,
         categoryID: string,
         _version: number,
-        _deleted: boolean | null,
+        _deleted?: boolean | null,
         _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null,
-      episodes:  {
+      episodes?:  {
         __typename: "ModelEpisodeConnection",
-        nextToken: string | null,
-        startedAt: number | null,
+        nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
       _version: number,
-      _deleted: boolean | null,
+      _deleted?: boolean | null,
       _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
     } | null,
     _version: number,
-    _deleted: boolean | null,
+    _deleted?: boolean | null,
     _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
@@ -852,25 +942,25 @@ export type SyncCategoriesQueryVariables = {
 };
 
 export type SyncCategoriesQuery = {
-  syncCategories:  {
+  syncCategories?:  {
     __typename: "ModelCategoryConnection",
     items:  Array< {
       __typename: "Category",
       id: string,
       title: string,
-      movies:  {
+      movies?:  {
         __typename: "ModelMovieConnection",
-        nextToken: string | null,
-        startedAt: number | null,
+        nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
       _version: number,
-      _deleted: boolean | null,
+      _deleted?: boolean | null,
       _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
-    } | null > | null,
-    nextToken: string | null,
-    startedAt: number | null,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
   } | null,
 };
 
@@ -879,34 +969,34 @@ export type GetCategoryQueryVariables = {
 };
 
 export type GetCategoryQuery = {
-  getCategory:  {
+  getCategory?:  {
     __typename: "Category",
     id: string,
     title: string,
-    movies:  {
+    movies?:  {
       __typename: "ModelMovieConnection",
       items:  Array< {
         __typename: "Movie",
         id: string,
         title: string,
         poster: string,
-        year: number | null,
-        numberOfSeasons: number | null,
-        plot: string | null,
-        cast: string | null,
-        creator: string | null,
+        year?: number | null,
+        numberOfSeasons?: number | null,
+        plot?: string | null,
+        cast?: string | null,
+        creator?: string | null,
         categoryID: string,
         _version: number,
-        _deleted: boolean | null,
+        _deleted?: boolean | null,
         _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
-      } | null > | null,
-      nextToken: string | null,
-      startedAt: number | null,
+      } | null >,
+      nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
     _version: number,
-    _deleted: boolean | null,
+    _deleted?: boolean | null,
     _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
@@ -920,25 +1010,25 @@ export type ListCategorysQueryVariables = {
 };
 
 export type ListCategorysQuery = {
-  listCategorys:  {
+  listCategorys?:  {
     __typename: "ModelCategoryConnection",
     items:  Array< {
       __typename: "Category",
       id: string,
       title: string,
-      movies:  {
+      movies?:  {
         __typename: "ModelMovieConnection",
-        nextToken: string | null,
-        startedAt: number | null,
+        nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
       _version: number,
-      _deleted: boolean | null,
+      _deleted?: boolean | null,
       _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
-    } | null > | null,
-    nextToken: string | null,
-    startedAt: number | null,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
   } | null,
 };
 
@@ -950,32 +1040,32 @@ export type SyncMoviesQueryVariables = {
 };
 
 export type SyncMoviesQuery = {
-  syncMovies:  {
+  syncMovies?:  {
     __typename: "ModelMovieConnection",
     items:  Array< {
       __typename: "Movie",
       id: string,
       title: string,
       poster: string,
-      year: number | null,
-      numberOfSeasons: number | null,
-      plot: string | null,
-      cast: string | null,
-      creator: string | null,
+      year?: number | null,
+      numberOfSeasons?: number | null,
+      plot?: string | null,
+      cast?: string | null,
+      creator?: string | null,
       categoryID: string,
-      seasons:  {
+      seasons?:  {
         __typename: "ModelSeasonConnection",
-        nextToken: string | null,
-        startedAt: number | null,
+        nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
       _version: number,
-      _deleted: boolean | null,
+      _deleted?: boolean | null,
       _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
-    } | null > | null,
-    nextToken: string | null,
-    startedAt: number | null,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
   } | null,
 };
 
@@ -984,18 +1074,18 @@ export type GetMovieQueryVariables = {
 };
 
 export type GetMovieQuery = {
-  getMovie:  {
+  getMovie?:  {
     __typename: "Movie",
     id: string,
     title: string,
     poster: string,
-    year: number | null,
-    numberOfSeasons: number | null,
-    plot: string | null,
-    cast: string | null,
-    creator: string | null,
+    year?: number | null,
+    numberOfSeasons?: number | null,
+    plot?: string | null,
+    cast?: string | null,
+    creator?: string | null,
     categoryID: string,
-    seasons:  {
+    seasons?:  {
       __typename: "ModelSeasonConnection",
       items:  Array< {
         __typename: "Season",
@@ -1003,16 +1093,16 @@ export type GetMovieQuery = {
         name: string,
         movieID: string,
         _version: number,
-        _deleted: boolean | null,
+        _deleted?: boolean | null,
         _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
-      } | null > | null,
-      nextToken: string | null,
-      startedAt: number | null,
+      } | null >,
+      nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
     _version: number,
-    _deleted: boolean | null,
+    _deleted?: boolean | null,
     _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
@@ -1026,32 +1116,32 @@ export type ListMoviesQueryVariables = {
 };
 
 export type ListMoviesQuery = {
-  listMovies:  {
+  listMovies?:  {
     __typename: "ModelMovieConnection",
     items:  Array< {
       __typename: "Movie",
       id: string,
       title: string,
       poster: string,
-      year: number | null,
-      numberOfSeasons: number | null,
-      plot: string | null,
-      cast: string | null,
-      creator: string | null,
+      year?: number | null,
+      numberOfSeasons?: number | null,
+      plot?: string | null,
+      cast?: string | null,
+      creator?: string | null,
       categoryID: string,
-      seasons:  {
+      seasons?:  {
         __typename: "ModelSeasonConnection",
-        nextToken: string | null,
-        startedAt: number | null,
+        nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
       _version: number,
-      _deleted: boolean | null,
+      _deleted?: boolean | null,
       _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
-    } | null > | null,
-    nextToken: string | null,
-    startedAt: number | null,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
   } | null,
 };
 
@@ -1063,43 +1153,43 @@ export type SyncSeasonsQueryVariables = {
 };
 
 export type SyncSeasonsQuery = {
-  syncSeasons:  {
+  syncSeasons?:  {
     __typename: "ModelSeasonConnection",
     items:  Array< {
       __typename: "Season",
       id: string,
       name: string,
       movieID: string,
-      movie:  {
+      movie?:  {
         __typename: "Movie",
         id: string,
         title: string,
         poster: string,
-        year: number | null,
-        numberOfSeasons: number | null,
-        plot: string | null,
-        cast: string | null,
-        creator: string | null,
+        year?: number | null,
+        numberOfSeasons?: number | null,
+        plot?: string | null,
+        cast?: string | null,
+        creator?: string | null,
         categoryID: string,
         _version: number,
-        _deleted: boolean | null,
+        _deleted?: boolean | null,
         _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null,
-      episodes:  {
+      episodes?:  {
         __typename: "ModelEpisodeConnection",
-        nextToken: string | null,
-        startedAt: number | null,
+        nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
       _version: number,
-      _deleted: boolean | null,
+      _deleted?: boolean | null,
       _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
-    } | null > | null,
-    nextToken: string | null,
-    startedAt: number | null,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
   } | null,
 };
 
@@ -1108,34 +1198,34 @@ export type GetSeasonQueryVariables = {
 };
 
 export type GetSeasonQuery = {
-  getSeason:  {
+  getSeason?:  {
     __typename: "Season",
     id: string,
     name: string,
     movieID: string,
-    movie:  {
+    movie?:  {
       __typename: "Movie",
       id: string,
       title: string,
       poster: string,
-      year: number | null,
-      numberOfSeasons: number | null,
-      plot: string | null,
-      cast: string | null,
-      creator: string | null,
+      year?: number | null,
+      numberOfSeasons?: number | null,
+      plot?: string | null,
+      cast?: string | null,
+      creator?: string | null,
       categoryID: string,
-      seasons:  {
+      seasons?:  {
         __typename: "ModelSeasonConnection",
-        nextToken: string | null,
-        startedAt: number | null,
+        nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
       _version: number,
-      _deleted: boolean | null,
+      _deleted?: boolean | null,
       _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
     } | null,
-    episodes:  {
+    episodes?:  {
       __typename: "ModelEpisodeConnection",
       items:  Array< {
         __typename: "Episode",
@@ -1143,20 +1233,20 @@ export type GetSeasonQuery = {
         title: string,
         poster: string,
         duration: string,
-        plot: string | null,
+        plot?: string | null,
         video: string,
         seasonID: string,
         _version: number,
-        _deleted: boolean | null,
+        _deleted?: boolean | null,
         _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
-      } | null > | null,
-      nextToken: string | null,
-      startedAt: number | null,
+      } | null >,
+      nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
     _version: number,
-    _deleted: boolean | null,
+    _deleted?: boolean | null,
     _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
@@ -1170,43 +1260,43 @@ export type ListSeasonsQueryVariables = {
 };
 
 export type ListSeasonsQuery = {
-  listSeasons:  {
+  listSeasons?:  {
     __typename: "ModelSeasonConnection",
     items:  Array< {
       __typename: "Season",
       id: string,
       name: string,
       movieID: string,
-      movie:  {
+      movie?:  {
         __typename: "Movie",
         id: string,
         title: string,
         poster: string,
-        year: number | null,
-        numberOfSeasons: number | null,
-        plot: string | null,
-        cast: string | null,
-        creator: string | null,
+        year?: number | null,
+        numberOfSeasons?: number | null,
+        plot?: string | null,
+        cast?: string | null,
+        creator?: string | null,
         categoryID: string,
         _version: number,
-        _deleted: boolean | null,
+        _deleted?: boolean | null,
         _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null,
-      episodes:  {
+      episodes?:  {
         __typename: "ModelEpisodeConnection",
-        nextToken: string | null,
-        startedAt: number | null,
+        nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
       _version: number,
-      _deleted: boolean | null,
+      _deleted?: boolean | null,
       _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
-    } | null > | null,
-    nextToken: string | null,
-    startedAt: number | null,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
   } | null,
 };
 
@@ -1218,7 +1308,7 @@ export type SyncEpisodesQueryVariables = {
 };
 
 export type SyncEpisodesQuery = {
-  syncEpisodes:  {
+  syncEpisodes?:  {
     __typename: "ModelEpisodeConnection",
     items:  Array< {
       __typename: "Episode",
@@ -1226,28 +1316,28 @@ export type SyncEpisodesQuery = {
       title: string,
       poster: string,
       duration: string,
-      plot: string | null,
+      plot?: string | null,
       video: string,
       seasonID: string,
-      season:  {
+      season?:  {
         __typename: "Season",
         id: string,
         name: string,
         movieID: string,
         _version: number,
-        _deleted: boolean | null,
+        _deleted?: boolean | null,
         _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null,
       _version: number,
-      _deleted: boolean | null,
+      _deleted?: boolean | null,
       _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
-    } | null > | null,
-    nextToken: string | null,
-    startedAt: number | null,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
   } | null,
 };
 
@@ -1256,50 +1346,50 @@ export type GetEpisodeQueryVariables = {
 };
 
 export type GetEpisodeQuery = {
-  getEpisode:  {
+  getEpisode?:  {
     __typename: "Episode",
     id: string,
     title: string,
     poster: string,
     duration: string,
-    plot: string | null,
+    plot?: string | null,
     video: string,
     seasonID: string,
-    season:  {
+    season?:  {
       __typename: "Season",
       id: string,
       name: string,
       movieID: string,
-      movie:  {
+      movie?:  {
         __typename: "Movie",
         id: string,
         title: string,
         poster: string,
-        year: number | null,
-        numberOfSeasons: number | null,
-        plot: string | null,
-        cast: string | null,
-        creator: string | null,
+        year?: number | null,
+        numberOfSeasons?: number | null,
+        plot?: string | null,
+        cast?: string | null,
+        creator?: string | null,
         categoryID: string,
         _version: number,
-        _deleted: boolean | null,
+        _deleted?: boolean | null,
         _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null,
-      episodes:  {
+      episodes?:  {
         __typename: "ModelEpisodeConnection",
-        nextToken: string | null,
-        startedAt: number | null,
+        nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
       _version: number,
-      _deleted: boolean | null,
+      _deleted?: boolean | null,
       _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
     } | null,
     _version: number,
-    _deleted: boolean | null,
+    _deleted?: boolean | null,
     _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
@@ -1313,7 +1403,7 @@ export type ListEpisodesQueryVariables = {
 };
 
 export type ListEpisodesQuery = {
-  listEpisodes:  {
+  listEpisodes?:  {
     __typename: "ModelEpisodeConnection",
     items:  Array< {
       __typename: "Episode",
@@ -1321,60 +1411,60 @@ export type ListEpisodesQuery = {
       title: string,
       poster: string,
       duration: string,
-      plot: string | null,
+      plot?: string | null,
       video: string,
       seasonID: string,
-      season:  {
+      season?:  {
         __typename: "Season",
         id: string,
         name: string,
         movieID: string,
         _version: number,
-        _deleted: boolean | null,
+        _deleted?: boolean | null,
         _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null,
       _version: number,
-      _deleted: boolean | null,
+      _deleted?: boolean | null,
       _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
-    } | null > | null,
-    nextToken: string | null,
-    startedAt: number | null,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
   } | null,
 };
 
 export type OnCreateCategorySubscription = {
-  onCreateCategory:  {
+  onCreateCategory?:  {
     __typename: "Category",
     id: string,
     title: string,
-    movies:  {
+    movies?:  {
       __typename: "ModelMovieConnection",
       items:  Array< {
         __typename: "Movie",
         id: string,
         title: string,
         poster: string,
-        year: number | null,
-        numberOfSeasons: number | null,
-        plot: string | null,
-        cast: string | null,
-        creator: string | null,
+        year?: number | null,
+        numberOfSeasons?: number | null,
+        plot?: string | null,
+        cast?: string | null,
+        creator?: string | null,
         categoryID: string,
         _version: number,
-        _deleted: boolean | null,
+        _deleted?: boolean | null,
         _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
-      } | null > | null,
-      nextToken: string | null,
-      startedAt: number | null,
+      } | null >,
+      nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
     _version: number,
-    _deleted: boolean | null,
+    _deleted?: boolean | null,
     _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
@@ -1382,34 +1472,34 @@ export type OnCreateCategorySubscription = {
 };
 
 export type OnUpdateCategorySubscription = {
-  onUpdateCategory:  {
+  onUpdateCategory?:  {
     __typename: "Category",
     id: string,
     title: string,
-    movies:  {
+    movies?:  {
       __typename: "ModelMovieConnection",
       items:  Array< {
         __typename: "Movie",
         id: string,
         title: string,
         poster: string,
-        year: number | null,
-        numberOfSeasons: number | null,
-        plot: string | null,
-        cast: string | null,
-        creator: string | null,
+        year?: number | null,
+        numberOfSeasons?: number | null,
+        plot?: string | null,
+        cast?: string | null,
+        creator?: string | null,
         categoryID: string,
         _version: number,
-        _deleted: boolean | null,
+        _deleted?: boolean | null,
         _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
-      } | null > | null,
-      nextToken: string | null,
-      startedAt: number | null,
+      } | null >,
+      nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
     _version: number,
-    _deleted: boolean | null,
+    _deleted?: boolean | null,
     _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
@@ -1417,34 +1507,34 @@ export type OnUpdateCategorySubscription = {
 };
 
 export type OnDeleteCategorySubscription = {
-  onDeleteCategory:  {
+  onDeleteCategory?:  {
     __typename: "Category",
     id: string,
     title: string,
-    movies:  {
+    movies?:  {
       __typename: "ModelMovieConnection",
       items:  Array< {
         __typename: "Movie",
         id: string,
         title: string,
         poster: string,
-        year: number | null,
-        numberOfSeasons: number | null,
-        plot: string | null,
-        cast: string | null,
-        creator: string | null,
+        year?: number | null,
+        numberOfSeasons?: number | null,
+        plot?: string | null,
+        cast?: string | null,
+        creator?: string | null,
         categoryID: string,
         _version: number,
-        _deleted: boolean | null,
+        _deleted?: boolean | null,
         _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
-      } | null > | null,
-      nextToken: string | null,
-      startedAt: number | null,
+      } | null >,
+      nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
     _version: number,
-    _deleted: boolean | null,
+    _deleted?: boolean | null,
     _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
@@ -1452,18 +1542,18 @@ export type OnDeleteCategorySubscription = {
 };
 
 export type OnCreateMovieSubscription = {
-  onCreateMovie:  {
+  onCreateMovie?:  {
     __typename: "Movie",
     id: string,
     title: string,
     poster: string,
-    year: number | null,
-    numberOfSeasons: number | null,
-    plot: string | null,
-    cast: string | null,
-    creator: string | null,
+    year?: number | null,
+    numberOfSeasons?: number | null,
+    plot?: string | null,
+    cast?: string | null,
+    creator?: string | null,
     categoryID: string,
-    seasons:  {
+    seasons?:  {
       __typename: "ModelSeasonConnection",
       items:  Array< {
         __typename: "Season",
@@ -1471,16 +1561,16 @@ export type OnCreateMovieSubscription = {
         name: string,
         movieID: string,
         _version: number,
-        _deleted: boolean | null,
+        _deleted?: boolean | null,
         _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
-      } | null > | null,
-      nextToken: string | null,
-      startedAt: number | null,
+      } | null >,
+      nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
     _version: number,
-    _deleted: boolean | null,
+    _deleted?: boolean | null,
     _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
@@ -1488,18 +1578,18 @@ export type OnCreateMovieSubscription = {
 };
 
 export type OnUpdateMovieSubscription = {
-  onUpdateMovie:  {
+  onUpdateMovie?:  {
     __typename: "Movie",
     id: string,
     title: string,
     poster: string,
-    year: number | null,
-    numberOfSeasons: number | null,
-    plot: string | null,
-    cast: string | null,
-    creator: string | null,
+    year?: number | null,
+    numberOfSeasons?: number | null,
+    plot?: string | null,
+    cast?: string | null,
+    creator?: string | null,
     categoryID: string,
-    seasons:  {
+    seasons?:  {
       __typename: "ModelSeasonConnection",
       items:  Array< {
         __typename: "Season",
@@ -1507,16 +1597,16 @@ export type OnUpdateMovieSubscription = {
         name: string,
         movieID: string,
         _version: number,
-        _deleted: boolean | null,
+        _deleted?: boolean | null,
         _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
-      } | null > | null,
-      nextToken: string | null,
-      startedAt: number | null,
+      } | null >,
+      nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
     _version: number,
-    _deleted: boolean | null,
+    _deleted?: boolean | null,
     _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
@@ -1524,18 +1614,18 @@ export type OnUpdateMovieSubscription = {
 };
 
 export type OnDeleteMovieSubscription = {
-  onDeleteMovie:  {
+  onDeleteMovie?:  {
     __typename: "Movie",
     id: string,
     title: string,
     poster: string,
-    year: number | null,
-    numberOfSeasons: number | null,
-    plot: string | null,
-    cast: string | null,
-    creator: string | null,
+    year?: number | null,
+    numberOfSeasons?: number | null,
+    plot?: string | null,
+    cast?: string | null,
+    creator?: string | null,
     categoryID: string,
-    seasons:  {
+    seasons?:  {
       __typename: "ModelSeasonConnection",
       items:  Array< {
         __typename: "Season",
@@ -1543,16 +1633,16 @@ export type OnDeleteMovieSubscription = {
         name: string,
         movieID: string,
         _version: number,
-        _deleted: boolean | null,
+        _deleted?: boolean | null,
         _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
-      } | null > | null,
-      nextToken: string | null,
-      startedAt: number | null,
+      } | null >,
+      nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
     _version: number,
-    _deleted: boolean | null,
+    _deleted?: boolean | null,
     _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
@@ -1560,34 +1650,34 @@ export type OnDeleteMovieSubscription = {
 };
 
 export type OnCreateSeasonSubscription = {
-  onCreateSeason:  {
+  onCreateSeason?:  {
     __typename: "Season",
     id: string,
     name: string,
     movieID: string,
-    movie:  {
+    movie?:  {
       __typename: "Movie",
       id: string,
       title: string,
       poster: string,
-      year: number | null,
-      numberOfSeasons: number | null,
-      plot: string | null,
-      cast: string | null,
-      creator: string | null,
+      year?: number | null,
+      numberOfSeasons?: number | null,
+      plot?: string | null,
+      cast?: string | null,
+      creator?: string | null,
       categoryID: string,
-      seasons:  {
+      seasons?:  {
         __typename: "ModelSeasonConnection",
-        nextToken: string | null,
-        startedAt: number | null,
+        nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
       _version: number,
-      _deleted: boolean | null,
+      _deleted?: boolean | null,
       _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
     } | null,
-    episodes:  {
+    episodes?:  {
       __typename: "ModelEpisodeConnection",
       items:  Array< {
         __typename: "Episode",
@@ -1595,20 +1685,20 @@ export type OnCreateSeasonSubscription = {
         title: string,
         poster: string,
         duration: string,
-        plot: string | null,
+        plot?: string | null,
         video: string,
         seasonID: string,
         _version: number,
-        _deleted: boolean | null,
+        _deleted?: boolean | null,
         _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
-      } | null > | null,
-      nextToken: string | null,
-      startedAt: number | null,
+      } | null >,
+      nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
     _version: number,
-    _deleted: boolean | null,
+    _deleted?: boolean | null,
     _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
@@ -1616,34 +1706,34 @@ export type OnCreateSeasonSubscription = {
 };
 
 export type OnUpdateSeasonSubscription = {
-  onUpdateSeason:  {
+  onUpdateSeason?:  {
     __typename: "Season",
     id: string,
     name: string,
     movieID: string,
-    movie:  {
+    movie?:  {
       __typename: "Movie",
       id: string,
       title: string,
       poster: string,
-      year: number | null,
-      numberOfSeasons: number | null,
-      plot: string | null,
-      cast: string | null,
-      creator: string | null,
+      year?: number | null,
+      numberOfSeasons?: number | null,
+      plot?: string | null,
+      cast?: string | null,
+      creator?: string | null,
       categoryID: string,
-      seasons:  {
+      seasons?:  {
         __typename: "ModelSeasonConnection",
-        nextToken: string | null,
-        startedAt: number | null,
+        nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
       _version: number,
-      _deleted: boolean | null,
+      _deleted?: boolean | null,
       _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
     } | null,
-    episodes:  {
+    episodes?:  {
       __typename: "ModelEpisodeConnection",
       items:  Array< {
         __typename: "Episode",
@@ -1651,20 +1741,20 @@ export type OnUpdateSeasonSubscription = {
         title: string,
         poster: string,
         duration: string,
-        plot: string | null,
+        plot?: string | null,
         video: string,
         seasonID: string,
         _version: number,
-        _deleted: boolean | null,
+        _deleted?: boolean | null,
         _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
-      } | null > | null,
-      nextToken: string | null,
-      startedAt: number | null,
+      } | null >,
+      nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
     _version: number,
-    _deleted: boolean | null,
+    _deleted?: boolean | null,
     _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
@@ -1672,34 +1762,34 @@ export type OnUpdateSeasonSubscription = {
 };
 
 export type OnDeleteSeasonSubscription = {
-  onDeleteSeason:  {
+  onDeleteSeason?:  {
     __typename: "Season",
     id: string,
     name: string,
     movieID: string,
-    movie:  {
+    movie?:  {
       __typename: "Movie",
       id: string,
       title: string,
       poster: string,
-      year: number | null,
-      numberOfSeasons: number | null,
-      plot: string | null,
-      cast: string | null,
-      creator: string | null,
+      year?: number | null,
+      numberOfSeasons?: number | null,
+      plot?: string | null,
+      cast?: string | null,
+      creator?: string | null,
       categoryID: string,
-      seasons:  {
+      seasons?:  {
         __typename: "ModelSeasonConnection",
-        nextToken: string | null,
-        startedAt: number | null,
+        nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
       _version: number,
-      _deleted: boolean | null,
+      _deleted?: boolean | null,
       _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
     } | null,
-    episodes:  {
+    episodes?:  {
       __typename: "ModelEpisodeConnection",
       items:  Array< {
         __typename: "Episode",
@@ -1707,20 +1797,20 @@ export type OnDeleteSeasonSubscription = {
         title: string,
         poster: string,
         duration: string,
-        plot: string | null,
+        plot?: string | null,
         video: string,
         seasonID: string,
         _version: number,
-        _deleted: boolean | null,
+        _deleted?: boolean | null,
         _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
-      } | null > | null,
-      nextToken: string | null,
-      startedAt: number | null,
+      } | null >,
+      nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
     _version: number,
-    _deleted: boolean | null,
+    _deleted?: boolean | null,
     _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
@@ -1728,50 +1818,50 @@ export type OnDeleteSeasonSubscription = {
 };
 
 export type OnCreateEpisodeSubscription = {
-  onCreateEpisode:  {
+  onCreateEpisode?:  {
     __typename: "Episode",
     id: string,
     title: string,
     poster: string,
     duration: string,
-    plot: string | null,
+    plot?: string | null,
     video: string,
     seasonID: string,
-    season:  {
+    season?:  {
       __typename: "Season",
       id: string,
       name: string,
       movieID: string,
-      movie:  {
+      movie?:  {
         __typename: "Movie",
         id: string,
         title: string,
         poster: string,
-        year: number | null,
-        numberOfSeasons: number | null,
-        plot: string | null,
-        cast: string | null,
-        creator: string | null,
+        year?: number | null,
+        numberOfSeasons?: number | null,
+        plot?: string | null,
+        cast?: string | null,
+        creator?: string | null,
         categoryID: string,
         _version: number,
-        _deleted: boolean | null,
+        _deleted?: boolean | null,
         _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null,
-      episodes:  {
+      episodes?:  {
         __typename: "ModelEpisodeConnection",
-        nextToken: string | null,
-        startedAt: number | null,
+        nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
       _version: number,
-      _deleted: boolean | null,
+      _deleted?: boolean | null,
       _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
     } | null,
     _version: number,
-    _deleted: boolean | null,
+    _deleted?: boolean | null,
     _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
@@ -1779,50 +1869,50 @@ export type OnCreateEpisodeSubscription = {
 };
 
 export type OnUpdateEpisodeSubscription = {
-  onUpdateEpisode:  {
+  onUpdateEpisode?:  {
     __typename: "Episode",
     id: string,
     title: string,
     poster: string,
     duration: string,
-    plot: string | null,
+    plot?: string | null,
     video: string,
     seasonID: string,
-    season:  {
+    season?:  {
       __typename: "Season",
       id: string,
       name: string,
       movieID: string,
-      movie:  {
+      movie?:  {
         __typename: "Movie",
         id: string,
         title: string,
         poster: string,
-        year: number | null,
-        numberOfSeasons: number | null,
-        plot: string | null,
-        cast: string | null,
-        creator: string | null,
+        year?: number | null,
+        numberOfSeasons?: number | null,
+        plot?: string | null,
+        cast?: string | null,
+        creator?: string | null,
         categoryID: string,
         _version: number,
-        _deleted: boolean | null,
+        _deleted?: boolean | null,
         _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null,
-      episodes:  {
+      episodes?:  {
         __typename: "ModelEpisodeConnection",
-        nextToken: string | null,
-        startedAt: number | null,
+        nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
       _version: number,
-      _deleted: boolean | null,
+      _deleted?: boolean | null,
       _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
     } | null,
     _version: number,
-    _deleted: boolean | null,
+    _deleted?: boolean | null,
     _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
@@ -1830,50 +1920,50 @@ export type OnUpdateEpisodeSubscription = {
 };
 
 export type OnDeleteEpisodeSubscription = {
-  onDeleteEpisode:  {
+  onDeleteEpisode?:  {
     __typename: "Episode",
     id: string,
     title: string,
     poster: string,
     duration: string,
-    plot: string | null,
+    plot?: string | null,
     video: string,
     seasonID: string,
-    season:  {
+    season?:  {
       __typename: "Season",
       id: string,
       name: string,
       movieID: string,
-      movie:  {
+      movie?:  {
         __typename: "Movie",
         id: string,
         title: string,
         poster: string,
-        year: number | null,
-        numberOfSeasons: number | null,
-        plot: string | null,
-        cast: string | null,
-        creator: string | null,
+        year?: number | null,
+        numberOfSeasons?: number | null,
+        plot?: string | null,
+        cast?: string | null,
+        creator?: string | null,
         categoryID: string,
         _version: number,
-        _deleted: boolean | null,
+        _deleted?: boolean | null,
         _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null,
-      episodes:  {
+      episodes?:  {
         __typename: "ModelEpisodeConnection",
-        nextToken: string | null,
-        startedAt: number | null,
+        nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
       _version: number,
-      _deleted: boolean | null,
+      _deleted?: boolean | null,
       _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
     } | null,
     _version: number,
-    _deleted: boolean | null,
+    _deleted?: boolean | null,
     _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
